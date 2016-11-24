@@ -68,6 +68,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Show mod info";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // menuStrip1
             // 
@@ -92,14 +93,14 @@
             // setGamePathToolStripMenuItem
             // 
             this.setGamePathToolStripMenuItem.Name = "setGamePathToolStripMenuItem";
-            this.setGamePathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.setGamePathToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.setGamePathToolStripMenuItem.Text = "Set Game Path";
             this.setGamePathToolStripMenuItem.Click += new System.EventHandler(this.setGamePathToolStripMenuItem_Click);
             // 
             // validateModsToolStripMenuItem
             // 
             this.validateModsToolStripMenuItem.Name = "validateModsToolStripMenuItem";
-            this.validateModsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.validateModsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.validateModsToolStripMenuItem.Text = "Validate Mods";
             // 
             // aboutToolStripMenuItem
@@ -148,6 +149,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stardew Modloader";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

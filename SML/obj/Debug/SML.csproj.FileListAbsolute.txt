@@ -8,3 +8,13 @@ c:\users\admin\documents\visual studio 2015\Projects\SML\SML\obj\Debug\SML.exe
 c:\users\admin\documents\visual studio 2015\Projects\SML\SML\obj\Debug\SML.pdb
 c:\users\admin\documents\visual studio 2015\Projects\SML\SML\obj\Debug\SML.frmMain.resources
 c:\users\admin\documents\visual studio 2015\Projects\SML\SML\obj\Debug\SML.frmSetPath.resources
+D:\gits\SML\SML\bin\Debug\SML.exe.config
+D:\gits\SML\SML\obj\Debug\SML.exe
+D:\gits\SML\SML\obj\Debug\SML.pdb
+D:\gits\SML\SML\bin\Debug\SML.exe
+D:\gits\SML\SML\bin\Debug\SML.pdb
+D:\gits\SML\SML\obj\Debug\SML.csprojResolveAssemblyReference.cache
+D:\gits\SML\SML\obj\Debug\SML.frmMain.resources
+D:\gits\SML\SML\obj\Debug\SML.frmSetPath.resources
+D:\gits\SML\SML\obj\Debug\SML.Properties.Resources.resources
+D:\gits\SML\SML\obj\Debug\SML.csproj.GenerateResource.Cache

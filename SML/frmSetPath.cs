@@ -20,7 +20,7 @@ namespace SML
 
         private void readSettings()
         {
-            var dic = File.ReadAllLines("sml.ini")
+            var dic = File.ReadAllLines(Application.StartupPath + "\\sml.ini")
               .Select(l => l.Split(new[] { '=' }))
               .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
             string gamepath = dic["USERID"];

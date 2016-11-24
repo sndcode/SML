@@ -29,6 +29,11 @@ namespace SML
 
         private void button3_Click(object sender, EventArgs e)
         {
+            checkedListBox1.Items.Clear();
+            readSettings();
+            modfolderpath = gamepath + "\\Mods\\";
+            //MessageBox.Show(modfolderpath);
+
             if( modfolderpath != "")
             {
                 DirectoryInfo directory = new DirectoryInfo(modfolderpath);
@@ -61,6 +66,42 @@ namespace SML
         private void setGamePathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showPathSelectionForm();
+        }
+
+        private void readSettings()
+        {
+            try
+            { 
+                var dic = File.ReadAllLines(Application.StartupPath + "\\sml.ini")
+                  .Select(l => l.Split(new[] { '=' }))
+                  .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
+                string settingspath = dic["path_to_exe"];
+                gamepath = settingspath;
+            }
+            catch { }
+        }
+
+        private void checkPaths()
+        {
+            //if(!File.Exists(Application.StartupPath + "\\sml.ini"))
+            //{
+            //    File.Create(Application.StartupPath + "\\sml.ini");
+            //    setGamePath();
+            //}
+            //else if(File.Exists(Application.StartupPath + "\\sml.ini"))
+            //{
+            //    readSettings();
+            //}
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            //checkPaths();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("INFO about mod : " + checkedListBox1.SelectedItem);
         }
     }
 }
