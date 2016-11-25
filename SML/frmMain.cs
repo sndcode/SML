@@ -15,6 +15,7 @@ namespace SML
     {
         public string gamepath;
         public string modfolderpath;
+        public string disabledmodspath;
 
         public frmMain()
         {
@@ -31,8 +32,6 @@ namespace SML
         {
             checkedListBox1.Items.Clear();
             readSettings();
-            modfolderpath = gamepath + "\\Mods\\";
-            //MessageBox.Show(modfolderpath);
 
             if( modfolderpath != "")
             {
@@ -54,7 +53,22 @@ namespace SML
 
         private void button1_Click(object sender, EventArgs e)
         {
+            foreach (object item in checkedListBox1.Items)
+            {
 
+                string name = item.ToString();
+                string filetoworkwith = modfolderpath + name + "\\" + name + ".dll";
+
+                if (!checkedListBox1.CheckedItems.Contains(item))
+                {
+                    File.Move(filetoworkwith, disabledmodspath + name + "\\" + name + ".dll");
+                }
+                else if (checkedListBox1.CheckedItems.Contains(item))
+                {
+                    File.Move(disabledmodspath + name + "\\" + name + ".dll" , filetoworkwith);
+                }
+
+            }
         }
 
         private void showPathSelectionForm()
@@ -75,8 +89,12 @@ namespace SML
                 var dic = File.ReadAllLines(Application.StartupPath + "\\sml.ini")
                   .Select(l => l.Split(new[] { '=' }))
                   .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
-                string settingspath = dic["path_to_exe"];
-                gamepath = settingspath;
+                string s1 = dic["path_to_modsfolder"];
+                string s2 = dic["path_to_disabledmodsfolder"];
+
+                modfolderpath = s1;
+                disabledmodspath = s2;
+
             }
             catch { }
         }
@@ -101,7 +119,17 @@ namespace SML
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("INFO about mod : " + checkedListBox1.SelectedItem);
+            MessageBox.Show("INFO about mod : " + checkedListBox1.SelectedItem + 
+                "\n" + 
+                File.ReadAllText( modfolderpath + checkedListBox1.SelectedItem + "\\manifest.json"));
+        }
+
+        private void showPathsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Paths : "
+                + "Mods Folder : " + modfolderpath
+                + "\nDisMods Folder : " + disabledmodspath
+                );
         }
     }
 }
