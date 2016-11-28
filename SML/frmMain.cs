@@ -30,15 +30,32 @@ namespace SML
 
         private void button3_Click(object sender, EventArgs e)
         {
+            
             checkedListBox1.Items.Clear();
             readSettings();
-
-            if( modfolderpath != "")
+            MessageBox.Show(disabledmodspath + "\n" + modfolderpath);
+            if ( modfolderpath != "")
             {
+                //For every mod in MODS folder
                 DirectoryInfo directory = new DirectoryInfo(modfolderpath);
                 DirectoryInfo[] directories = directory.GetDirectories();
                 foreach (DirectoryInfo folder in directories)
+                {
                     checkedListBox1.Items.Add(folder.Name);
+                    for (int i = 0; i <= (checkedListBox1.Items.Count - 1); i++)
+                    {
+                        checkedListBox1.SetItemCheckState(i, CheckState.Checked);
+                    }
+                }
+                    
+                //For every mod in Disabled mods folder
+                DirectoryInfo directory2 = new DirectoryInfo(disabledmodspath);
+                DirectoryInfo[] directories2 = directory2.GetDirectories();
+                foreach (DirectoryInfo folder2 in directories2)
+                {
+                    checkedListBox1.Items.Add(folder2.Name);
+                }
+                    
             }
             else if( gamepath == "" ) { setGamePath(); }
         }
@@ -56,16 +73,36 @@ namespace SML
             foreach (object item in checkedListBox1.Items)
             {
 
-                string name = item.ToString();
-                string filetoworkwith = modfolderpath + name + "\\" + name + ".dll";
+                string name = item.ToString();//Actually the modname only
+                string filetoworkwith = modfolderpath + name /*+ "\\" + name + ".dll"*/;//Absolute path string with file and extension
 
+                //If the item is not checked
                 if (!checkedListBox1.CheckedItems.Contains(item))
                 {
-                    File.Move(filetoworkwith, disabledmodspath + name + "\\" + name + ".dll");
+                    if(!File.Exists(filetoworkwith))
+                    {
+                       //Mod is NOT in the mods folder so we dont need to do anything
+                    }
+                    else if (File.Exists(filetoworkwith))
+                    {
+                        //Mod IS in mods folder but was not checked, so move in disabled mods folder.
+                        File.Move(filetoworkwith, disabledmodspath + name /* + "\\" + name + ".dll"*/);
+                    }
+
+
                 }
+                //If the item is checked
                 else if (checkedListBox1.CheckedItems.Contains(item))
                 {
-                    File.Move(disabledmodspath + name + "\\" + name + ".dll" , filetoworkwith);
+                    if (!File.Exists(filetoworkwith))
+                    {
+                        MessageBox.Show(disabledmodspath + name /*+ "\\" + name + ".dll"+filetoworkwith*/);
+                        File.Move(disabledmodspath + name, filetoworkwith);
+                    }
+                    else if (File.Exists(filetoworkwith))
+                    {
+                        //mod is already in mods folder
+                    }
                 }
 
             }
